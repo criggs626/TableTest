@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Data Modal</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Data-Modal</li>
+            </ol>
+            <h2>Data-Modal</h2>
+            <h5>The data-modal handler is built for items that will open a modal window.</h5>
+            <hr style='border-color: #4c4c4c;'>
+            <p>The field begins by getting the information required for a query from data attributes on the input type. </p>
+            <pre class="prettyprint" style="padding:1em;">var settings = $(this).data("modal");
+var href = $(this).attr("href");
+var title = $(this).attr("title");
+var callback = $(this).data("callback");
+var container = "";</pre>                    
+            <p>The block then checks the settings and reads the handler to determine what action to take.</p>
+            <pre class="prettyprint" style="padding:1em;">if (settings.x.indexOf("%") != -1) {...}
+if (settings.handler == "iframe" && href) {...}
+if (settings.handler == "ajax" && href) {...}
+if (settings.handler == "img" && href) {...}</pre>
+            <p>The actual button is setup like this.</p>
+            <pre class='prettyprint'>&lt;button data-modal='{"handler":"img","y":"30%","x":"30%"}'href='img/icon.png'&gt;
+Open Modal&lt;/button&gt;</pre>
+            <p>The modal should be setup like this.</p>
+            <pre class='prettyprint'>&lt;div id="modal" class="modal"&gt;
+    &lt;div id="modal-topbox"&gt;&nbsp;&lt;/div&gt;
+    &lt;button class="btn btn-danger" onclick='$("#modal").hide()'&gt;X&lt;/button&gt;
+    &lt;div id="modal-container"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+            <h3>Example:</h3>
+            <p>Click the button below to open the modal window</p>
+            <button class="btn" data-modal='{"handler":"img","y":"30%","x":"30%"}' href='img/icon.png' style='margin-bottom:10px'>Open Modal</button>
+            <div id="modal" class="modal" style="text-align: right">
+                <div id="modal-topbox">&nbsp;</div>
+                <button class="btn btn-danger" onclick='$("#modal").hide()'>X</button>
+                <div id="modal-container">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,2 @@
+<h5>Sample HTML Response</h5>
+<p>When The requested information isn't a table the responses HTML will be put in the container as you see here. This allows you to format the response server side</p>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Data View</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Data-View</li>
+            </ol>
+            <h2>Data-View</h2>
+            <h5>The data-view handler is built for queries that will return different pages and place them into a view.</h5><hr style='border-color: #4c4c4c;'>
+            <p>The field begins by getting the information required for a query from data attributes on the input type.</p>
+            <pre class="prettyprint" style="padding:1em;">
+var url = $(this).data('url');
+var query = $(this).data('query');
+var requestData = $(this).data("data");
+var container = $(this).data("container");</pre>                    
+            <p>The block then sends a get request to the url with the query. Whether the query is added to the url or separate data. </p>
+            <pre class="prettyprint" style="padding:1em;">$.get(url + query, requestData, function (data) {...});</pre>
+            <p>The handler then attempts to parse the JSON from the response. 
+                If the response is not JSON it will simply place the result into 
+                the container element specified in the data attribute. 
+                If it is JSON it will take the appropriate action parsing the data.
+            </p>
+            <pre class="prettyprint" style="padding:1em;">try {
+    content = JSON.parse(data);
+    if (content['payload']) {
+        $('#' + container).html(data);
+    }
+} 
+catch (e) {
+    $('#' + container).html(data);
+}</pre>
+            <p>The switch view button should look like this</p>
+            <pre class='prettyprint'>&lt;button class="btn" data-view data-url='js/' data-query="matrix" 
+data-container='containment'&gt;Switch View&lt;/button&gt;</pre>
+            <h3>Example:</h3>
+            <p>Click the button to switch the view out</p>
+            <button class="btn" data-view data-url='js/' data-query="matrix" data-container='containment' style="margin-bottom: 15px">Switch View</button> 
+            <div style="background-color: whitesmoke; margin-bottom: 25px;height: 550px" id="containment">
+                <h5>Sample View</h5>
+                <p>The content of this container will be replaced when you click the button above.</p>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Data Search</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/tables.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Data-Search</li>
+            </ol>
+            <h2>Data-Search</h2>
+            <h5>The data-search handler is built for items that will search for a certain query and return the results.</h5><hr style='border-color: #4c4c4c;'>
+            <p>The field begins by getting the information required for a query from data attributes on the input type. </p>
+            <pre class="prettyprint" style="padding:1em;">
+var url = $(this).data('url');
+var query = $(this).data('query');
+var requestData = $(this).data("data");
+var container = $(this).data("container");
+var type = $(this).data('type');</pre>                    
+            <p>The block then sends a get request to the url with the query. Whether the query is added to the url or separate data. </p>
+            <pre class="prettyprint" style="padding:1em;">$.get(url + query, requestData, function (data) {...});</pre>
+            <p>The handler then reads the type of the request from the data attributes. 
+                If the type is a table it will parse the json and add it to the table, 
+                then add the pagination, search, and order functions to the table. If the 
+                type is not a table it will place the response into the container.
+            </p>
+            <pre class="prettyprint" style="padding:1em;">if (type == 'table') {
+    var content = JSON.parse(data);
+    if ($('tbody').html() === '') {
+        //if the tables body is empty initialize the table and add content
+        $('#' + container).data('search', query);
+        table(container, $("#size").val(), content);
+    }
+    else if...
+}</pre>
+            <p>If the table has already had data added to it, the handler will 
+                check to see if the search query is the same and update the 
+                table. If the search query is different it will reset the table 
+                and add the new information to it.</p>
+            <p>The table search button would look like this.</p>
+            <div style="display: flex"><p class='small'>The data-query attribute for this element is assigned by <pre class="small prettyprint" style="margin-right: 10px;margin-left: 10px">.on("keyup",function(){...});</pre> applied to the text field</p></div>
+            <pre class="prettyprint">&ltbutton class="btn" id="search" data-search data-url='js/' 
+data-container='myTable' data-type='table'&gt;Search Table&lt/button&gt;</pre>
+            <p>The html search button would look like this.</p>
+            <pre class="prettyprint">&ltbutton class="btn" data-search data-url='js/' data-container='containment' 
+data-query='html' &gt;html&lt/button&gt;</pre>
+            <h3>Example:</h3>
+            <p>Enter Query into text box then click the button to search and populate table</p>
+            <p class='small'><i>Search pdf or jpg for table results.</i></p>
+
+            <div style="display:flex;margin-bottom: 10px"> <input id='query' type="text" class="form-control" style="width: 250px; margin-right: 20px" placeholder="Enter Search term here..."> 
+                <button class="btn" id="search" data-search data-url='js/' data-container='myTable' data-type='table' style="margin-right: 20px;" >Search Table</button> 
+                <button class="btn" data-search data-url='js/' data-container='containment' data-query='html' >html</button>
+            </div>
+            <div style="background-color: whitesmoke; margin-bottom: 25px">
+                <table id='myTable' class='table table-condensed table-striped' style="">
+                    <thead>
+                        <tr>
+                            <th data-sort="string">Domain</th>
+                            <th>Status</th>
+                            <th data-sort="date">Created</th>
+                            <th data-sort="date">Expires</th>
+                            <th data-sort="int">Account</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <form style="display: flex;">
+                    <img src="img/first.png" class="nav" id="first" alt=''>
+                    <img src="img/prev.png" class="nav" id='prev' alt=''>
+                    <p id='pageNumber'></p>
+                    <img src="img/next.png" class="nav" id='next' alt=''>
+                    <img src="img/last.png" alt='' id="last" class='nav'>
+                    <select class="form-control" id="size" style='width:max-content'>
+                        <option selected="selected" value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option id="all">all</option>
+                    </select>
+                </form><hr style='border-color: #4c4c4c;'>
+                <div id='containment'>HTML will appear here</div>
+                <script>
+                    $("#query").on('keyup', function () {
+                        $('#search').data('query', $(this).val());
+                    });
+                </script>
+            </div>
+        </div>
+    </body>
+</html>

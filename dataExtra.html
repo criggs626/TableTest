@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Data Extra</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Data-Extra</li>
+            </ol>
+            <h2>Data-Extra</h2>
+            <h5>The Methods listed below are extra methods that are either similar to another fully documented method or short enough to not warrant a drawn out explanation</h5><hr style='border-color: #4c4c4c;'>
+            <h4>Data-Uri</h4>
+            <p>Data-Uri simply returns the uri of the item clicked</p>
+            <pre class="prettyprint" style="padding:1em;">return ajax.uri(this, event);</pre>                    
+            <p>It then sets up listeners to see what action is picked if cancel it closes the modal. If confirm it navigates to the specified href attribute.</p>
+            <h4>Data-Form</h4>
+            <p>Data-Form simply takes a form that is being submitted and submits it as an AJAX</p>
+            <pre class="prettyprint" style="padding:1em;">return ajax.submit(this, event);</pre>                    
+            <h4>Data-Form-Confirm</h4>
+            <p>Data-Form-Confirm Does similar actions as Data-Confirm but instead of navigating on confirm it submits a form.</p>
+            <pre class="prettyprint" style="padding:1em;">$("input[name='confirm']", scope).click(function () {
+    ajax.submit($this, $event);
+});</pre>           
+            <h4>Data-Form-Confirm-Post</h4>
+            <p>Data-Form-Confirm Does similar actions as Data-Confirm and Data-Form-Confirm but on confirm submits the form in a different manner.</p>
+            <pre class="prettyprint" style="padding:1em;">$("input[name='confirm']", scope).click(function () {
+    $($this).data("cont", true);
+    $this.submit();
+});</pre> 
+
+            <h5>Note: For More information on any of the data confirm methods go to <a href="dataConfirm.html"><i>Data-Confirm</i></a></h5>
+        </div>
+    </body>
+</html>

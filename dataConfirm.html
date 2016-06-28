@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Data Confirm</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Data-Confirm</li>
+            </ol>
+            <h2>Data-Confirm</h2>
+            <h5>The data-confirm handler is built to ask the user if they would like to confirm whatever action the button trigers. In this case navigating to another page</h5>
+            <hr style='border-color: #4c4c4c;'>
+            <p>The field begins by getting the information required then opens a modal for with confirm and cancel options.</p>
+            <pre class="prettyprint" style="padding:1em;">var scope = $('#modal-confirm');
+var settings = $(this).data("modal");
+var title = $(this).attr("title");
+var modal = $('#modal-confirm').show();
+var $this = this;</pre>                    
+            <p>It then sets up listeners to see what action is picked if cancel it closes the modal. If confirm it navigates to the specified href attribute.</p>
+            <pre class="prettyprint" style="padding:1em;">$("input[name='cancel']", scope).click(function () {
+    modal.hide();
+    $event.preventDefault();
+});
+$("input[name='confirm']", scope).click(function () {
+    window.location.href = $this.href;
+});</pre>
+            <p>The actual button will look like this.</p>
+            <pre class='prettyprint'>&lt;a class="btn" data-confirm href='index.html' title="Leave Page" style='margin-bottom:10px'&gt;
+navigate to home
+&lt;/a&gt;</pre>
+            <p>The modal for the confirmation message should be set up like this.</p>
+            <p class='small'>Some of the settings are optional. such as modal-confirm-topbox</p>
+            <pre class='prettyprint'>&lt;div id="modal-confirm" class="centered" style='display:none'&gt;
+    &lt;div id="modal-confirm-topbox"&gt;&lt;/div&gt;
+    &lt;div id="modal-confirm-container"&gt;
+        &lt;div id="modal-confirm-text"&gt;Are you sure you want to navigate away?&lt;/div&gt;
+            &lt;input name="cancel" type="button" value="Cancel" class="btn btn-danger"&gt;
+            &lt;input name="confirm" type="button" value="Confirm" class="btn btn-success"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+            <h5>Note: This class is very similar to data-form-confirm and data-form-confirm-post. The differences are simply the action taken on success.</h5>
+
+            <h3>Example:</h3>
+            <p>Click the button below to open the confirm window</p>
+            <a class="btn" data-confirm href='index.html' title="Leave Page" style='margin-bottom:10px'><h2>navigate to home</h2></a>
+            <div id="modal-confirm" class="centered" style='display:none'>
+                <div style='background-color: whitesmoke;border-radius: 5px;padding: 10px'>
+                    <div id="modal-confirm-topbox"></div>
+                    <div id="modal-confirm-container">
+                        <div id="modal-confirm-text">Are you sure you want to navigate away?</div>
+                        <input name="cancel" type="button" value="Cancel" class="btn btn-danger">
+                        <input name="confirm" type="button" value="Confirm" class="btn btn-success">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

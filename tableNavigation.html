@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Table Navigation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/tables.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Table-Navigation</li>
+            </ol>
+            <h2>Table-Navigation</h2>
+            <h5>This describes how to add navigation that will work with your table.</h5>
+            <p>After you've set up your table a navigation class is automatically started that listens to certain elements.
+                These elements are placed in a form and each given the class nav so the navigation function can listen to a $(".nav").on("click",function{...}) and id's to tell the listener what action to take.</p>
+            <p>The Id's and their actions are listed below</p>
+            <ul>
+                <li>ID:first navigates to the first page</li>
+                <li>ID:prev navigates to the previous page</li>
+                <li>ID:next navigates to the next page</li>
+                <li>ID:last navigates to the last page</li>
+                <li>ID:size is a select menu with different size options for pagination. Each item has to be given the correct size value</li>
+                <li>ID:all is the last item in the select menu and it's value is set programmatically to show all items</li>
+                <li>ID:pageNumber is where the current page number out of the total page numbers is displayed</li>
+            </ul>
+            <pre class="prettyprint" style="padding:1em;">&lt;form style="display: flex;"&gt;
+    &lt;img src="img/first.png" class="nav" id="first" alt=''&gt;
+    &lt;img src="img/prev.png" class="nav" id='prev' alt=''&gt;
+    &lt;p id='pageNumber'&gt;&lt;/p&gt;
+    &lt;img src="img/next.png" class="nav" id='next' alt=''&gt;
+    &lt;img src="img/last.png" alt='' id="last" class='nav'&gt;
+    &lt;select class="form-control" id="size" style='width:max-content'&gt;
+        &lt;option selected="selected" value="1"&gt;1&lt;/option&gt;
+        &lt;option value="2"&gt;2&lt;/option&gt;
+        &lt;option value="4"&gt;4&lt;/option&gt;
+        &lt;option value="6"&gt;6&lt;/option&gt;
+        &lt;option id="all"&gt;all&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/form&gt;</pre>                    
+            <h3>Example:</h3>
+            <p>This is the example table from the code above. Navigation is added as a form before the table.</p>
+            <div style="background-color: whitesmoke; margin-bottom: 25px;padding-top: 10px" id="containment">
+                <form style="display: flex;">
+                    <img src="img/first.png" class="nav" id="first" alt=''>
+                    <img src="img/prev.png" class="nav" id='prev' alt=''>
+                    <p id='pageNumber'></p>
+                    <img src="img/next.png" class="nav" id='next' alt=''>
+                    <img src="img/last.png" alt='' id="last" class='nav'>
+                    <select class="form-control" id="size" style='width:max-content'>
+                        <option selected="selected" value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                        <option id="all">all</option>
+                    </select>
+                </form>
+                <table id='myTable' class='table table-condensed table-striped' style="">
+                    <thead>
+                        <tr>
+                            <th data-sort="string">Name</th>
+                            <th>Status</th>
+                            <th data-sort="date">Birth Date</th>
+                            <th data-sort="int">Age</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            $.get('js/ex3', function (data) {
+                table('myTable', 1, JSON.parse(data));
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Table Update</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/tables.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Table-Update</li>
+            </ol>
+            <h2>Table-Update</h2>
+            <h5>Updating the table allows you to add content from JSON to an existing table without removing previous content</h5><hr style='border-color: #4c4c4c;'>
+            <p>After you've setup the table you simply have to call tableUpdate(JSON content) and it will add the content to the table</p>
+            <pre class="prettyprint" style="padding:1em;">table("myTable", 10, content);
+//myTable is the table Id above
+//5 is the starting value for items per page
+//content is a variable with the value of our JSON to be added to the table
+function update(){
+    tableUpdate(updateContent)
+    //Where updateContent is the updated content
+}</pre>                    
+            <h3>Example:</h3>
+            <p>This is the example table from the code above. Click the button to update the table</p>
+            <button class='btn' onclick="update()" style='margin-bottom: 10px'>Update Table</button>
+            <div style="background-color: whitesmoke; margin-bottom: 25px;" id="containment">
+                <table id='myTable' class='table table-condensed table-striped' style="">
+                    <thead>
+                        <tr>
+                            <th data-sort="string">Name</th>
+                            <th>Status</th>
+                            <th data-sort="date">Birth Date</th>
+                            <th data-sort="int">Age</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            $.get('js/ex1', function (data) {
+                table('myTable', 10, JSON.parse(data));
+            });
+            function update() {
+                $.get('js/ex2', function (data) {
+                    tableUpdate(JSON.parse(data));
+                });
+            }
+        </script>
+    </body>
+</html>

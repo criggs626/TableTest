@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/tables.js"></script>
+        <script src="js/handling.js"></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/icon.png" />
+    </head>
+    <body>
+        <div class="container" style="width:60%;background-color: #FCFCFC">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Table-Initialize</li>
+            </ol>
+            <h2>Table-Initialize</h2>
+            <h5>Initializing the table allows you to add content from JSON to a table along with adding pagination, sorting, and searching.</h5><hr style='border-color: #4c4c4c;'>
+            <p>The first step is to set up the table, you do this by adding items to that corespond to your data in the 
+                &lt;thead&gt; tag. And specifying sort types for each column. You also have to give the table an id and add an empty body tag</p>
+            <p class='small'>Supported types include int, string, and date. To add more types look up 
+                <a href="https://github.com/joequery/Stupid-Table-Plugin#creating-your-own-data-types"><i>StupidTable Creating your own data type</i></a>
+                <br>Classes used are from Bootstrap.
+            </p>
+            <pre class="prettyprint" style="padding:1em;">
+&lt;table id='myTable' class='table table-condensed table-striped'&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th data-sort="string"&gt;Name&lt;/th&gt;      &lt;!-- This column is sortable by string--&gt;
+            &lt;th&gt;Status&lt;/th&gt;                       &lt;!-- This column is not sortable --&gt;
+            &lt;th data-sort="date"&gt;Birth Date&lt;/th&gt;  &lt;!-- This column is sortable by date --&gt;
+            &lt;th data-sort="int"&gt;Age&lt;/th&gt;          &lt;!-- This column is sortable by int --&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;&lt;/tbody&gt;
+&lt;/table&gt;</pre>   
+            <p>The initializer is the command table(String tableId, int itemsPerPage, JSON tableContent);</p>
+            <pre class="prettyprint" style="padding:1em;">table("myTable", 5, content);
+//myTable is the table Id above
+//5 is the starting value for items per page
+//content is a variable with the value of our JSON to be added to the table</pre>                    
+
+            <h3>Example:</h3>
+            <p>This is the example table from the code above</p>
+            <div style="background-color: whitesmoke; margin-bottom: 25px;" id="containment">
+                <table id='myTable' class='table table-condensed table-striped' style="">
+                    <thead>
+                        <tr>
+                            <th data-sort="string">Name</th>
+                            <th>Status</th>
+                            <th data-sort="date">Birth Date</th>
+                            <th data-sort="int">Age</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+$.get('js/ex1',function(data){
+    table('myTable',5,JSON.parse(data));
+});
+        </script>
+    </body>
+</html>
