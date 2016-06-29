@@ -44,6 +44,7 @@ and open the template in the editor.
     &lt;tbody&gt;&lt;/tbody&gt;
 &lt;/table&gt;</pre>   
             <p>The initializer is the command table(String tableId, int itemsPerPage, JSON tableContent);</p>
+            <p class="small">Note: when using JSON the table data is stored as a two dimensional matrix in the data attribute. Along with having a records total attribute with the total number of records.</p>
             <pre class="prettyprint" style="padding:1em;">table("myTable", 5, content);
 //myTable is the table Id above
 //5 is the starting value for items per page
