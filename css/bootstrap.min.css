@@ -23,3 +23,7 @@ div.centered{
     justify-content: center; /* align horizontal */
     align-items: center; /* align vertical */
 }
+
+pre.prettyprint{
+    padding:1em;
+}
